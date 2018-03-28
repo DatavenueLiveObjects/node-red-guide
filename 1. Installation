@@ -1,0 +1,18 @@
+1) installation suivre https://www.youtube.com/watch?v=hEpeobDyj8k ou https://nodered.org/docs/platforms/windows
+
+attention , ne pas être derrière un proxy + utiliser le mode command (CMD) en tant qu'administrateur (clic droit sur cmd.exe)
+a) télécahrgerment et installation de node red 
+    https://nodejs.org/en/
+
+b) ouvrir invite de commande en tant qu'administrateur et installer node-red
+    npm install -g --unsafe-perm node-red
+
+c) installer le module de dashboarding 
+    npm install node-red-dashboard
+
+d) lancer node red 
+    node-red
+
+note red est ici : http://localhost:1880
+
+les dashboards sont ici : http://localhost:1880/ui
