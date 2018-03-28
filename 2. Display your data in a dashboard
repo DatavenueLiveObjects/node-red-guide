@@ -1,8 +1,8 @@
-attention ne pas être derrière un proxy 
+On Windows launch CMD.exe as an administrator 
 
-CMD en mode administrateur
-lancer node red 
+```ruby
     node-red
+```
 
 note red est ici : http://localhost:1880
 
