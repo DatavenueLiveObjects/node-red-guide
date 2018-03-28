@@ -1,0 +1,210 @@
+attention ne pas être derrière un proxy 
+
+CMD en mode administrateur
+lancer node red 
+    node-red
+
+note red est ici : http://localhost:1880
+
+les dashboards sont ici : http://localhost:1880/ui
+
+1) retrieve your data and display them in a dashboard
+
+a) Paramétrage du node MQTT in order to retrieve data from your device though Live Objects 
+
+
+	* select  in node list (input section) 
+	* drag and drop it on node-red flow page
+	* double click on the node 
+	* click on the pen to configure your Mqtt connection 
+	* configure your Live Objects MQTT connection 
+	* 
+	* 
+
+
+
+
+
+Server/Connection
+server
+liveobjects.orange-business.com
+Server/Connection
+port
+1883
+Server/Connection
+client ID
+urn:lo:nsid:whatyouwant
+
+whatyouwant will be the name of your application in "devices" list
+
+
+
+
+
+	* 
+	* click on Security tab
+	* 
+	* 
+
+
+
+
+Server/Security
+Username
+payload+bridge
+Server/Security
+password
+complete with your own APIKey (à préciser les rôles qu'elle doit avoir)
+	* click on 
+
+
+
+
+	* fill the topic 
+	* 
+
+
+
+
+
+Topic
+
+router/~event/v1/data/new/#
+to retrieve all data from all devices
+ou 
+router/~event/v1/data/new/android359041083857129  ???? marche pas 
+reessayer en mqtt avec  "router/~event/v1/data/new/urn/lora/0018B200000021FB/uplink"
+
+	* finaly you have 
+
+
+
+
+b) convert your payload from json format to javascript
+
+	* select json node in function section
+	* drag and drop it on node-red flow page
+	* double click on the json node 
+	* Select "Always convert to JavaScript Object" and click on "Done"
+
+
+
+
+	* link json node with the previous one to get this
+
+
+
+
+
+3) configuring your dashboard with widget
+
+First, note that on Live Objects MQTT format, you find mesured value 
+	* for location in payload.location {lon, lat}
+	* for all other mesured value in payload.value { ....}
+
+
+
+a) Open the dashboard organization clicking on   section on the right.
+You can manage your tabs and groups
+
+	* tabs are different pages of your dashboard
+	* groups describe a tab organization. Each group is a colum on the current tab. They are ordered from left to right
+
+
+
+To display a widget on your dashboard , you must add that widget to a group.
+
+b) display a gauge
+
+Drag and drop node in dashboard section. Link it to the json node
+
+
+
+Double click on Gauge node 
+
+
+	* select a group or click on the pen to create a group
+	* enter a label : it will be the name of the widget on dashboard
+	* in Value format enter the name of the field you want to display 
+
+		* for instance {{payload.value.temperature}} 
+	* Units : the unit to display in the widget (free text)
+	* Name : the name of the widget to distinguish them in node red (free text)
+
+
+then click on 
+
+
+
+You get a flow like this : 
+
+
+
+You can also organized several gauges to dusplay different value like this 
+
+
+
+c) display a chart with one or several values
+
+Chart nodes can display X values corresponding to X coming values.
+
+
+	* with this you display 2 different charts (one for temp , the second for hydro)
+
+
+
+
+
+	* with that you display one chart with 2 lines 
+
+
+
+
+
+
+Let's buid the first one option
+
+Drag and drop node in function section. Link it to the json node
+
+Double-click on function node 
+
+	* enter a name "recup temp" in order to distinguish it in your flow
+	* copy paste this code in function body , it will extract the data you want to display from the JSON payload to a simple string
+
+
+
+var msgout ="";
+msgout= msg.payload.value.temperature;
+msg.payload=msgout;
+
+msg.topic="Temp"; // mandatory for charts to display a label
+
+return msg;
+
+
+Drag and drop node in dashboard section. Link it to the previous function node.
+
+
+Double click on chart node 
+
+	* select a group or click on the pen to create a group
+	* enter a label : it will be the name of the widget on dashboard
+	* Name : the name of the widget to distinguish them in node red (free text)
+	* becareful that your data will be between min and max of Y axis otherwiser you would see no curv
+
+
+then click on  
+
+
+
+
+
+
+
+You get a flow like this : 
+
+
+
+d) click on 
+
+e) you can see your dashboard on http://localhost:1880/ui/  (ui in lower case)
