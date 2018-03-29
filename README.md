@@ -8,4 +8,4 @@ You can simulate the object using our android demo <a href="https://play.google.
 
 Do not forget to enter your API key in the android demo.
 
-You can download the sample exampleDashboard.json and import it in Node-RED. Do not forget to modify MQTT, the function node called "set payload and headers" and http request node with your own identifier.
+You can download the sample _exampleDashboard.json_ and import it in Node-RED. Do not forget to modify MQTT, the function node called "set payload and headers" and http request node with your own identifier.
