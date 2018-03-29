@@ -1,6 +1,4 @@
-# node-red-guide
-
-Learn how to create Node-RED dashboards with Live Objects + a sample
+# Learn how to create Node-RED dashboards with Live Objects + a sample
 
 Get that kind of dashboard 
 
