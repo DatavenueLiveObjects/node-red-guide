@@ -1,3 +1,5 @@
+Copyright Orange - 2019 - Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) - https://creativecommons.org/licenses/by-sa/3.0/
+
 # Learn how to create Node-RED dashboards with Live Objects + a sample
 
 Get your Live Objects account on https://liveobjects.orange-business.com/
